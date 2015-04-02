@@ -6,11 +6,11 @@ use \Bitrix\Main\SystemException as SystemException;
 
 class CEleemntList extends \CBitrixComponent
 {
-	protected $items = array();
-	protected $filter = array();
+    protected $items = array();
+    protected $filter = array();
     /** @var \Bitrix\Main\DB\Result */
-	protected $rs;
-	protected $arElementsLink = array();
+    protected $rs;
+    protected $arElementsLink = array();
     protected $sortOrder;
     protected $sortCode;
     protected $countOnPage = 5;
@@ -114,19 +114,19 @@ class CEleemntList extends \CBitrixComponent
     {
     }
 
-	protected function isAjax()
-	{
+    protected function isAjax()
+    {
         $context = Main\Context::getCurrent();
         return ($context->getRequest()->getQuery('ajax') == 'Y' && $context->getRequest()->getQuery('method') == 'load');
-	}
+    }
 
-	/**
-	 * Process incoming request.
-	 * @return void
-	 */
-	protected function processRequest()
-	{
-		global $APPLICATION;
+    /**
+     * Process incoming request.
+     * @return void
+     */
+    protected function processRequest()
+    {
+        global $APPLICATION;
 
         $this->request = $_REQUEST;
 
@@ -143,7 +143,7 @@ class CEleemntList extends \CBitrixComponent
             global $$pageNavVar;
             $$pageNavVar = $this->request['page'];
         }*/
-	}
+    }
 
 
     /**
@@ -159,17 +159,17 @@ class CEleemntList extends \CBitrixComponent
         }
     }
 
-	/**
-	 * Get data.
-	 * @return array
-	 */
-	protected function getItems()
-	{
-		$arNavParams = array(
-			"nPageSize" => $this->arParams['COUNT_ON_PAGE']
-		);
+    /**
+     * Get data.
+     * @return array
+     */
+    protected function getItems()
+    {
+        $arNavParams = array(
+            "nPageSize" => $this->arParams['COUNT_ON_PAGE']
+        );
 
-		$arNavigation = \CDBResult::GetNavParams($arNavParams);
+        $arNavigation = \CDBResult::GetNavParams($arNavParams);
         $entity = \nav\IblockOrm\ElementTable::createEntity((int) $this->arParams['IBLOCK_ID']);
         $entityClass = $entity->getDataClass();
 
@@ -181,24 +181,24 @@ class CEleemntList extends \CBitrixComponent
             'offset' => $arNavigation['SIZEN'] * ($arNavigation['PAGEN'] - 1),
         ));
 
-		$this->items = $entityClass::fetchAllWithProperties($this->rs);
+        $this->items = $entityClass::fetchAllWithProperties($this->rs);
 
-		return $this->items;
-	}
+        return $this->items;
+    }
 
-	protected function prepareData()
-	{
-		$this->prepareFilter();
-		$this->getItems();
-	}
+    protected function prepareData()
+    {
+        $this->prepareFilter();
+        $this->getItems();
+    }
 
-	/**
-	 * Prepare data to render.
-	 * @return void
-	 */
-	protected function formatResult()
-	{
-		$this->arResult['ITEMS'] = $this->items;
+    /**
+     * Prepare data to render.
+     * @return void
+     */
+    protected function formatResult()
+    {
+        $this->arResult['ITEMS'] = $this->items;
 
         if (is_object($this->rs->oldCDBResult)) {
             $navComponentObject = null;
@@ -206,5 +206,5 @@ class CEleemntList extends \CBitrixComponent
             $this->arResult['NAV_CACHED_DATA'] = $navComponentObject->GetTemplateCachedData();
             $this->arResult['NAV_RESULT'] = $this->rs->oldCDBResult;
         }
-	}
+    }
 }
