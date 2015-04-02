@@ -4,7 +4,7 @@ use \Bitrix\Main\Text\String as String;
 use \Bitrix\Main\Localization\Loc as Loc;
 use \Bitrix\Main\SystemException as SystemException;
 
-class CEleemntList extends \CBitrixComponent
+class CElementList extends \CBitrixComponent
 {
     protected $items = array();
     protected $filter = array();
@@ -131,12 +131,6 @@ class CEleemntList extends \CBitrixComponent
         $this->request = $_REQUEST;
 
         \CPageOption::SetOptionString("main", "nav_page_in_session", "N");
-
-        if (isset($this->request['onPage']) && in_array($this->request['onPage'], $this->availCountOnPage)) {
-            $this->countOnPage = (int) $this->request['onPage'];
-        } else {
-            $this->countOnPage = $this->availCountOnPage[0];
-        }
 
         /*if (isset($this->request['page'])) {
             $pageNavVar = 'PAGEN_' . ($GLOBALS['NavNum'] + 1);
