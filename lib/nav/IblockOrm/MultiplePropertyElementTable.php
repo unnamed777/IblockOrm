@@ -56,6 +56,9 @@ abstract class MultiplePropertyElementTable extends Entity\DataManager
                 'data_type' => 'float',
                 'required' => true,
             ),
+            'DESCRIPTION' => array(
+                'data_type' => 'string',
+            ),
             new Entity\ReferenceField(
                 'PROPERTY',
                 '\Bitrix\Iblock\Property',
