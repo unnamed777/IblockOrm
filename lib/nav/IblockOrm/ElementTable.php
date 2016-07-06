@@ -128,15 +128,28 @@ class ElementTable extends Entity\DataManager
                     '%s',
                     'PROPERTY_' . $arProp['CODE'] . '_ENTITY.VALUE'
                 );
+
+                $map[] = new Entity\ExpressionField(
+                    'PROPERTY_' . $arProp['CODE'] . '_DESCRIPTION',
+                    '%s',
+                    'PROPERTY_' . $arProp['CODE'] . '_ENTITY.DESCRIPTION'
+                );
             } else {
                 $map[] = new Entity\ExpressionField(
                     'PROPERTY_' . $arProp['CODE'],
                     '%s',
                     'PROPERTY.' . $arProp['CODE']
                 );
+
+                $map[] = new Entity\ExpressionField(
+                    'PROPERTY_' . $arProp['CODE'] . '_DESCRIPTION',
+                    '%s',
+                    'PROPERTY.' . $arProp['CODE'] . '_DESCRIPTION'
+                );
             }
         }
 
+//         p($map,1);
         return $map;
     }
 

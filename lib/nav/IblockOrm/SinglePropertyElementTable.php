@@ -31,7 +31,7 @@ abstract class SinglePropertyElementTable extends Entity\DataManager
             'IBLOCK_ELEMENT_ID' => array(
                 'data_type' => 'integer',
                 'primary' => true,
-            )
+            ),
         );
 
         foreach ($metadata['props'] as $arProp) {
@@ -44,6 +44,9 @@ abstract class SinglePropertyElementTable extends Entity\DataManager
                     $map[] = new Entity\FloatField($arProp['CODE'], array(
                         'column_name' => 'PROPERTY_' . $arProp['ID'],
                     ));
+                    $map[] = new Entity\StringField($arProp['CODE'] . '_DESCRIPTION', array(
+                        'column_name' => 'DESCRIPTION_' . $arProp['ID'],
+                    ));
                     break;
 
                 case 'L':
@@ -52,12 +55,18 @@ abstract class SinglePropertyElementTable extends Entity\DataManager
                     $map[] = new Entity\IntegerField($arProp['CODE'], array(
                         'column_name' => 'PROPERTY_' . $arProp['ID'],
                     ));
+                    $map[] = new Entity\StringField($arProp['CODE'] . '_DESCRIPTION', array(
+                        'column_name' => 'DESCRIPTION_' . $arProp['ID'],
+                    ));
                     break;
 
                 case 'S':
                 default:
                     $map[] = new Entity\StringField($arProp['CODE'], array(
                         'column_name' => 'PROPERTY_' . $arProp['ID'],
+                    ));
+                    $map[] = new Entity\StringField($arProp['CODE'] . '_DESCRIPTION', array(
+                        'column_name' => 'DESCRIPTION_' . $arProp['ID'],
                     ));
                     break;
             }
